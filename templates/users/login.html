@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    {% include 'web/componentes/scripts.html' %}
+    <title>Iniciar Sesión - ONLYFLAN</title>
 </head>
 <body>
     <form method="post">
@@ -11,7 +12,9 @@
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Ingresar</button>
+        
 
     </form>
+    {% include 'web/componentes/footer.html' %}
 </body>
 </html>

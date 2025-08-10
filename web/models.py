@@ -9,6 +9,7 @@ class Producto(models.Model):
     precio = models.DecimalField("Precio", max_digits=10, decimal_places=0)
     stock = models.PositiveIntegerField("Stock", default=0)
     imagen = models.ImageField("Imagen", upload_to="productos/")
+    premium = models.BooleanField("Premium", default=False)
 
 
     def __str__(self):

@@ -1,16 +1,93 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Crear Cuenta - Mi Tienda de Flanes</title>
+    {# Incluye los scripts y estilos de Bootstrap. Asumimos que scripts.html contiene los CDN necesarios. #}
+    {% include 'web/componentes/scripts.html' %}
+    <style>
+        /* Estilos adicionales para centrar el contenido y dar un toque de color */
+        body {
+            background-color: #f8f9fa; /* Un fondo claro para que destaque el formulario */
+        }
+        .registration-container { /* Renombrado para claridad, pero comparte estilos con login-container */
+            max-width: 550px; /* Ancho un poco mayor para el formulario de registro si tiene más campos */
+            margin: 50px auto; /* Centra el contenedor horizontalmente y añade margen superior */
+            padding: 30px;
+            border-radius: 15px; /* Bordes redondeados para un aspecto suave */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra sutil para profundidad */
+            background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%); /* Degradado suave para el fondo del formulario */
+        }
+        .form-control:focus {
+            border-color: #ffc107; /* Color de borde al enfocar, similar a un amarillo dorado del flan */
+            box-shadow: 0 0 0 0.25rem rgba(255, 193, 7, 0.25); /* Sombra de enfoque con el mismo tono */
+        }
+        .btn-custom-primary {
+            background-color: #e0a800; /* Un amarillo/naranja más profundo */
+            border-color: #e0a800;
+            color: #fff;
+        }
+        .btn-custom-primary:hover {
+            background-color: #c69500; /* Tono más oscuro al pasar el ratón */
+            border-color: #c69500;
+        }
+        .btn-custom-secondary {
+            background-color: #6c757d; /* Gris para botones secundarios */
+            border-color: #6c757d;
+            color: #fff;
+        }
+        .btn-custom-secondary:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+        }
+    </style>
 </head>
-<body>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" >Registrar </button>
+<body class="d-flex flex-column min-vh-100">
 
-    </form>
+    
+    
+    <main class="flex-grow-1 d-flex align-items-center justify-content-center">
+        <div class="registration-container">
+            <h2 class="text-center mb-4 text-dark">Crea tu Cuenta</h2>
+            <form method="post">
+                {% csrf_token %}
+                {# Muestra mensajes de error globales del formulario si existen #}
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {% for error in form.non_field_errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                {# Iterar sobre los campos del formulario #}
+                {% for field in form %}
+                    <div class="mb-3">
+                        <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                        {{ field }}
+                        {# Muestra errores específicos del campo #}
+                        {% if field.errors %}
+                            <div class="form-text text-danger">
+                                {% for error in field.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+
+                <div class="d-grid gap-2 mb-3">
+                    <button type="submit" class="btn btn-custom-primary btn-lg">Registrarme</button>
+                    <a href="{% url 'login' %}" class="btn btn-custom-secondary btn-lg">¿Ya tienes cuenta? Inicia sesión aquí</a>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    {# Incluye el pie de página #}
+    {% include 'web/componentes/footer.html' %}
 </body>
 </html>

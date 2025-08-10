@@ -13,22 +13,37 @@
     {% include 'web/componentes/navbar.html' %}
     
     
-    <main class="flex-grow-1"><h1>prueba</h1>
-    
-        <ha>Flanes Diponibles</ha>
-
-    {% for flan in flanes %}
-    <img src="{{flan.imagen.url}}" alt="">
-    <li>{{ flan.nombre_producto }}</li>
-    <li>{{ flan.descripcion }}</li>
-    <li>{{ flan.precio }}</li>
-    <li>{{ flan.stock }}</li>
-    
-    
-    {% endfor %}
-    
-    
-    
+    <main class="flex-grow-1">
+        <div class="container py-5">
+            <h1 class="mb-4 text-center">Flanes Disponibles</h1>
+            <div class="row">
+                {% for flan in flanes %}
+                <!-- Cada tarjeta ocupará 12 columnas en móvil, 6 en tablet y 3 en PC -->
+                <div class="col-12 col-md-6 col-lg-3 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <!-- La imagen del flan, adaptándose al tamaño de la tarjeta -->
+                        <img src="{{ flan.imagen.url }}" class="card-img-top" alt="Imagen de {{ flan.nombre_producto }}">
+                        <div class="card-body d-flex flex-column">
+                            <!-- Nombre del producto como título de la tarjeta -->
+                            <h5 class="card-title">{{ flan.nombre_producto }}</h5>
+                            <!-- Descripción del producto, con flex-grow-1 para empujar el contenido inferior -->
+                            <p class="card-text flex-grow-1">{{ flan.descripcion|truncatechars:30 }}</p>
+                            <!-- Precio del flan -->
+                            <h6 class="text-muted mb-2">Precio: ${{ flan.precio }}</h6>
+                            <!-- Indicador de stock -->
+                            {% if flan.stock > 0 %}
+                                <span class="badge bg-success mb-3">En Stock: {{ flan.stock }}</span>
+                            {% else %}
+                                <span class="badge bg-danger mb-3">Agotado</span>
+                            {% endif %}
+                            <!-- Botón para ver detalles, alineado al final de la tarjeta -->
+                            <a href="{% url 'detalle' flan.id %}" class="btn btn-primary mt-auto">Ver Detalles</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
     </main>
 
 
