@@ -5,10 +5,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>HOME - ONLY FLAN</title>
     {% include 'web/componentes/scripts.html' %}
 </head>
-<body class="d-flex flex-column min-vh-100">
+<body class="d-flex flex-column style="background-color: #fff3cd; min-vh-100">
 
     {% include 'web/componentes/navbar.html' %}
     
@@ -24,7 +24,7 @@
                 <div class="col-md-8">
                     <h2 class="text-warning mb-3">¡Acceso Exclusivo!</h2>
                     <p class="lead text-dark">
-                        Ingresa o regístrate para acceder a nuestra colección exclusiva de **Flanes Premium** y disfrutar de sabores únicos.
+                        <a href="{% url 'login'%}">Iniciar Sesión</a> o <a href="{% url 'register'%}">Registrate</a> para acceder a nuestra colección exclusiva de **Flanes Premium** y disfrutar de sabores únicos.
                     </p>
                     
                 </div>

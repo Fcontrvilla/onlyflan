@@ -6,13 +6,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear Cuenta - Mi Tienda de Flanes</title>
-    {# Incluye los scripts y estilos de Bootstrap. Asumimos que scripts.html contiene los CDN necesarios. #}
+    
     {% include 'web/componentes/scripts.html' %}
     <style>
         /* Estilos adicionales para centrar el contenido y dar un toque de color */
-        body {
-            background-color: #f8f9fa; /* Un fondo claro para que destaque el formulario */
+        body 
+         
+        
+        
+        {
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
+        
+        .main-container {
+            flex: 1;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
         .registration-container { /* Renombrado para claridad, pero comparte estilos con login-container */
             max-width: 550px; /* Ancho un poco mayor para el formulario de registro si tiene más campos */
             margin: 50px auto; /* Centra el contenedor horizontalmente y añade margen superior */
@@ -51,7 +65,7 @@
     
     <main class="flex-grow-1 d-flex align-items-center justify-content-center">
         <div class="registration-container">
-            <h2 class="text-center mb-4 text-dark">Crea tu Cuenta</h2>
+            <h3><i class="fas fa-sign-in-alt me-2"></i> Registrate</h3>
             <form method="post">
                 {% csrf_token %}
                 {# Muestra mensajes de error globales del formulario si existen #}
